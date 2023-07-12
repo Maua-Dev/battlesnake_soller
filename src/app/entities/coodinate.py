@@ -9,5 +9,6 @@ class Coordinate:
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
     
+    @staticmethod
     def from_json(json):
         return Coordinate(json['x'], json['y'])
