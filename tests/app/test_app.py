@@ -5,7 +5,15 @@ class Test_App:
     def test_read_root(self):
         resp = read_root()
         
-        assert resp == {"Hello": "World"}
+        
+        assert resp == {
+        "apiversion": "1",
+        "author": "VgsStudio",
+        "color": "#9370DB",
+        "head": "caffeine",
+        "tail": "weight",
+        "version": "0.0.1-beta"
+        }
 
     def test_get_item(self):
         
