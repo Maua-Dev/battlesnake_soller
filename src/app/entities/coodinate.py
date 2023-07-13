@@ -12,3 +12,6 @@ class Coordinate:
     @staticmethod
     def from_json(json):
         return Coordinate(json['x'], json['y'])
+    
+    def __repr__(self):
+        return f"Coordinate: {self.x},{self.y}"
