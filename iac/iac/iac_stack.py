@@ -71,7 +71,7 @@ class IacStack(Stack):
             evaluation_periods=1,
             comparison_operator=ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
         ) 
-        topic = Topic.from_topic_arn(self, "Topic", f"arn:aws:sns:{self.region}:{self.aws_account_id}:sns-battlesnake")
+        topic = Topic.from_topic_arn(self, self.project_name + "Topic", f"arn:aws:sns:{self.region}:{self.aws_account_id}:sns-battlesnake")
         sns_action = SnsAction(topic)
 
         alarm.add_alarm_action(sns_action)
