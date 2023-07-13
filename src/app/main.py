@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from mangum import Mangum
-from src.app.entities.battlesanke import Battlesnake
+from .entities.battlesanke import Battlesnake
 
-from src.app.entities.board import Board
+from .entities.board import Board
 
 app = FastAPI()
 

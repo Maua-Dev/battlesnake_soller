@@ -1,6 +1,6 @@
 from random import randint
 from typing import List
-from src.app.entities.coodinate import Coordinate
+from .coodinate import Coordinate
 
 
 class Battlesnake:

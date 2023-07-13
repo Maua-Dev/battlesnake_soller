@@ -1,7 +1,7 @@
 from typing import List
-from src.app.entities.battlesanke import Battlesnake
+from .battlesanke import Battlesnake
 
-from src.app.entities.coodinate import Coordinate
+from .coodinate import Coordinate
 
 
 class Board:
