@@ -19,3 +19,15 @@ class Coordinate:
     @staticmethod
     def distance(a, b):
         return abs(a.x - b.x) + abs(a.y - b.y)
+    
+    def move_command(move: str):
+        if move == "up":
+            return Coordinate(0, 1)
+        elif move == "down":
+            return Coordinate(0, -1)
+        elif move == "left":
+            return Coordinate(-1, 0)
+        elif move == "right":
+            return Coordinate(1, 0)
+        else:
+            return Coordinate(0, 0)
