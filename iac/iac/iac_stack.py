@@ -67,7 +67,6 @@ class IacStack(Stack):
         ).create_alarm(
             self, self.project_name +"LambdaAlarm",
             threshold=3100,
-            description=f"Alarm when Lambda function ({self.project_name}) is invoked more than 3000 times",
             evaluation_periods=2,
             comparison_operator=ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
         ) 
