@@ -62,13 +62,13 @@ class IacStack(Stack):
             iam.ManagedPolicy.from_aws_managed_policy_name("IAMUserChangePassword")
         )
 
-        alarm = lambda_fn.metric_invocations().create_alarm(
+        alarm = lambda_fn.metric_invocations(
+            period=Duration.days(7),
+        ).create_alarm(
             self, self.project_name +"LambdaAlarm",
-            threshold=3000,
+            threshold=3100,
+            description=f"Alarm when Lambda function ({self.project_name}) is invoked more than 3000 times",
             evaluation_periods=2,
-            datapoints_to_alarm=2,
-            period=Duration.days(14),
-            statistic="sum",
             comparison_operator=ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
         ) 
 
