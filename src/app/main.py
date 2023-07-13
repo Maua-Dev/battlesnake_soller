@@ -49,10 +49,7 @@ def move(request: dict):
     print("Response")
     print(response)
 
-    return {
-  "move": "right",
-  "shout": "Moving up!"
-}
+    return response
 
 @app.post("/end")
 def end_battle(request: dict):
