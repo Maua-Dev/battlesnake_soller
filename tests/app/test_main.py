@@ -1,7 +1,7 @@
 from src.app.main import move, read_root, start_battle
 
 
-class Test_App:
+class Test_Main:
     def test_read_root(self):
         resp = read_root()
         
@@ -146,4 +146,10 @@ class Test_App:
 
         response = move(request)
 
-        assert response == "right"
+        expected = {
+            "move": "right",
+            "shout": "Some random shout"
+        }
+        assert type(response) == dict
+        assert response["move"] == expected["move"]
+        assert type(response["shout"])

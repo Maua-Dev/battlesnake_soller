@@ -68,3 +68,7 @@ class Test_Battlesnake:
         assert battlesnake == expected_battlesnake
         
 
+    def test_random_shout(self):
+        shout = Battlesnake.random_shout()
+
+        assert type(shout) == str

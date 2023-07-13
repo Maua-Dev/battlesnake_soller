@@ -1,3 +1,4 @@
+from random import randint
 from typing import List
 from src.app.entities.coodinate import Coordinate
 
@@ -12,6 +13,7 @@ class Battlesnake:
     length: int
     shout: str
     squad: str
+    
     
     def __init__(self, snake_id: str, name: str, health: int, body: List[Coordinate], latency: str, head: Coordinate, length: int, shout: str, squad: str):
         self.snake_id = snake_id
@@ -42,3 +44,8 @@ class Battlesnake:
         shout = json["shout"]
         squad = json.get("squad", "")
         return Battlesnake(snake_id, name, health, body, latency, head, length, shout, squad)
+    
+    @staticmethod
+    def random_shout():
+        shouts = ["Salve, cria!", "Tá ligado, cachorro do mangue?", "Naquele naipão"]
+        return shouts[randint(0, len(shouts) - 1)]

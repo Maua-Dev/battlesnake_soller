@@ -34,7 +34,12 @@ def move(request: dict):
 
     moviment = board.navigate_to(me.head, board.get_closest_food(me))
 
-    return moviment
+    response = {
+        "move": moviment,
+        "shout": Battlesnake.random_shout()
+    }
+
+    return response
 
 @app.post("/end")
 def end_battle(request: dict):
