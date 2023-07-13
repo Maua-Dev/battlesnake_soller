@@ -64,7 +64,6 @@ class IacStack(Stack):
         )
 
         alarm = lambda_fn.metric_invocations(
-            period=Duration.days(1),
         ).create_alarm(
             self, self.project_name +"LambdaAlarm",
             threshold=3100,
