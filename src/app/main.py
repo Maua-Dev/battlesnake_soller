@@ -12,7 +12,7 @@ def read_root():
         "apiversion": "1",
         "author": "VgsStudio",
         "color": "#9370DB",
-        "head": "caffeine",
+        "head": "villain",
         "tail": "weight",
         "version": "0.0.1-beta"
         }
