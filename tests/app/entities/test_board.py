@@ -7,15 +7,15 @@ class Test_Board:
     def test_board(self):
         height = 1
         width = 2
-        foods = []
+        food = []
         snakes = []
         hazards = []
 
-        board = Board(height, width, foods, snakes, hazards)
+        board = Board(height, width, food, snakes, hazards)
 
         assert board.height == height
         assert board.width == width
-        assert board.foods == foods
+        assert board.food == food
         assert board.snakes == snakes
         assert board.hazards == hazards
         
@@ -28,7 +28,7 @@ class Test_Board:
           "board": {
             "height": 11,
             "width": 11,
-            "foods": [
+            "food": [
               {"x": 1, "y": 3},
               {"x": 5, "y": 5},
               {"x": 9, "y": 0}
