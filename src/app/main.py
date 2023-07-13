@@ -36,7 +36,9 @@ def move(request: dict):
 
     return moviment
 
-# @app.post("/end")
+@app.post("/end")
+def end_battle(request: dict):
+    return
 
 
 
