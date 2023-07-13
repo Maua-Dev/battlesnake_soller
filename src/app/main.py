@@ -38,14 +38,21 @@ def move(request: dict):
     board = Board.from_json(request["board"])
     me = Battlesnake.from_json(request["you"])
 
-    moviment = board.navigate_to(me.head, board.get_closest_food(me))
+    move = board.navigate_to(me.head, board.get_closest_food(me))
 
-    print(moviment)
+    maybe_snake = board.is_snake(move, me.head)
+
+    if type(maybe_snake) == Battlesnake:
+        print("Dodge snake")
+        move = board.dodge_snake_body(me, maybe_snake)
+
+    print(move)
 
     response = {
-        "move": moviment,
+        "move": move,
         "shout": Battlesnake.random_shout()
     }
+
     print("Response")
     print(response)
 

@@ -67,4 +67,9 @@ class Board:
             if hazard == coordinate:
                 return True
         return False
-    
+
+    def dodge_snake_body(self, me: Battlesnake, snake: Battlesnake):
+        for move in ["up", "down", "left", "right"]:
+            if not self.is_snake(move, me.head):
+                return move
+        return "up"
