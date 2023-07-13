@@ -46,6 +46,8 @@ def move(request: dict):
         "move": moviment,
         "shout": Battlesnake.random_shout()
     }
+    print("Response")
+    print(response)
 
     return response
 
