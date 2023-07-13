@@ -49,3 +49,9 @@ class Battlesnake:
     def random_shout():
         shouts = ["Salve, cria!", "Tá ligado, cachorro do mangue?", "Naquele naipão"]
         return shouts[randint(0, len(shouts) - 1)]
+    
+    def is_inside_snake(self, coordinate: Coordinate):
+        for body in self.body:
+            if body == coordinate:
+                return True
+        return False

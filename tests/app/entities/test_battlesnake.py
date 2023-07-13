@@ -72,3 +72,21 @@ class Test_Battlesnake:
         shout = Battlesnake.random_shout()
 
         assert type(shout) == str
+
+    def test_is_inside_snake(self):
+        snake_id = "1"
+        name = "name"
+        health = 100
+        body = [Coordinate(0, 0), Coordinate(1, 0), Coordinate(2, 0)]
+        latency = "latency"
+        head = Coordinate(1, 2)
+        length = 1
+        shout = "shout"
+        squad = "squad"
+
+        battlesnake = Battlesnake(snake_id, name, health, body, latency, head, length, shout, squad)
+
+        assert battlesnake.is_inside_snake(Coordinate(0, 0))
+        assert battlesnake.is_inside_snake(Coordinate(1, 0))
+        assert battlesnake.is_inside_snake(Coordinate(2, 0))
+        assert not battlesnake.is_inside_snake(Coordinate(3, 0))
