@@ -66,7 +66,7 @@ class IacStack(Stack):
         alarm = lambda_fn.metric_invocations(
         ).create_alarm(
             self, self.project_name +"LambdaAlarm",
-            threshold=3100,
+            threshold=100,
             evaluation_periods=2,
             comparison_operator=ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
         ) 
