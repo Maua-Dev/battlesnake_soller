@@ -67,7 +67,7 @@ class IacStack(Stack):
             period=Duration.hours(1),
         ).create_alarm(
             self, self.project_name +"LambdaAlarm",
-            threshold=600,
+            threshold=300,
             evaluation_periods=1,
             comparison_operator=ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
         ) 
