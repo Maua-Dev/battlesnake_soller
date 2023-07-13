@@ -8,7 +8,11 @@ from aws_cdk import (
     SecretValue
 )
 from constructs import Construct
-from aws_cdk.aws_apigateway import RestApi, Cors, LambdaIntegration
+from aws_cdk.aws_cloudwatch import ComparisonOperator
+from aws_cdk.aws_sns import Topic
+
+from aws_cdk.aws_cloudwatch_actions import SnsAction
+
 
 class IacStack(Stack):
 
@@ -57,6 +61,21 @@ class IacStack(Stack):
         user.add_managed_policy(
             iam.ManagedPolicy.from_aws_managed_policy_name("IAMUserChangePassword")
         )
+
+        alarm = lambda_fn.metric_invocations().create_alarm(
+            self, self.project_name +"LambdaAlarm",
+            threshold=3000,
+            evaluation_periods=2,
+            datapoints_to_alarm=2,
+            period=Duration.days(14),
+            statistic="sum",
+            comparison_operator=ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+        ) 
+
+        topic = Topic.from_topic_arn(self, "Topic", f"arn:aws:{self.region}:{self.account}:sns-battlesnake")
+        sns_action = SnsAction(topic)
+
+        alarm.add_alarm_action(sns_action)
 
         CfnOutput(self, self.project_name + "Url",
                   value=lambda_url.url,
