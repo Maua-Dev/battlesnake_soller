@@ -33,3 +33,23 @@ class Board:
         snakes = [Battlesnake.from_json(snake) for snake in json["snakes"]]
         hazards = [Coordinate.from_json(hazard) for hazard in json["hazards"]]
         return Board(height, width, food, snakes, hazards)
+
+    @staticmethod
+    def navigate_to(start: Coordinate, end: Coordinate):
+        if start.x < end.x:
+            return "right"
+        elif start.x > end.x:
+            return "left"
+        elif start.y < end.y:
+            return "up"
+        elif start.y > end.y:
+            return "down"
+        else:
+            return "up"
+
+    def get_closest_food(self, snake: Battlesnake):
+        closest_food = self.food[0]
+        for food in self.food:
+            if Coordinate.distance(snake.head, food) < Coordinate.distance(snake.head, closest_food):
+                closest_food = food
+        return closest_food

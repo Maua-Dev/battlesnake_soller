@@ -133,3 +133,87 @@ class Test_Board:
         actual_board = Board.from_json(request["board"])
 
         assert actual_board == expected_board
+
+    def test_navigate_right(self):
+        a = Coordinate(0, 0)
+        b = Coordinate(1, 0)
+
+        assert Board.navigate_to(a, b) == "right"
+
+    def test_navigate_up(self):
+        a = Coordinate(0, 0)
+        b = Coordinate(0, 1)
+
+        assert Board.navigate_to(a, b) == "up"
+
+    def test_navigate_right_2(self):
+        a = Coordinate(0, 0)
+        b = Coordinate(1, 1)
+
+        assert Board.navigate_to(a, b) == "right"
+
+    def test_get_closest_food(self):
+        board = Board(
+            height =11,
+            width = 11,
+            food= [
+                Coordinate(8, 8),
+                Coordinate(9, 9),
+                Coordinate(11, 7)
+            ],
+            snakes=[
+                Battlesnake(
+                    "snake-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(3, 2),
+                        Coordinate(2, 1),
+                        Coordinate(1, 0)
+                    ],
+                    "111",
+                    Coordinate(4, 6),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                Battlesnake(
+                    "snake-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 6),
+                        Coordinate(4, 7),
+                        Coordinate(4, 8)
+                    ],
+                    "111",
+                    Coordinate(0, 0),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                )
+            ],
+            hazards=[
+                Coordinate(3, 2)
+            ]
+        )
+
+        my_snake = Battlesnake(
+            snake_id="snake-id-string",
+            name="Sneky McSnek Face",
+            health=90,
+            body=[
+                Coordinate(0, 0),
+                Coordinate(1, 0),
+                Coordinate(2, 0)
+            ],
+            latency="111",
+            head=Coordinate(0, 0),
+            length=3,
+            shout="Tá ligado?",
+            squad="1"
+        )
+        closest_food = board.get_closest_food(my_snake)
+
+        assert type(closest_food) == Coordinate
+        assert closest_food == Coordinate(8, 8)
