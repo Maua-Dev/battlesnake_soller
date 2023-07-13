@@ -20,6 +20,7 @@ class IacStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         self.project_name = os.environ.get("PROJECT_NAME")
+        self.aws_account_id = os.environ.get("AWS_ACCOUNT_ID")
 
         lambda_fn = _lambda.Function(
             self,
@@ -71,7 +72,7 @@ class IacStack(Stack):
             comparison_operator=ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
         ) 
 
-        topic = Topic.from_topic_arn(self, "Topic", f"arn:aws:{self.region}:{self.account}:sns-battlesnake")
+        topic = Topic.from_topic_arn(self, "Topic", f"arn:aws:{self.region}:{self.aws_account_id}:sns-battlesnake")
         sns_action = SnsAction(topic)
 
         alarm.add_alarm_action(sns_action)
