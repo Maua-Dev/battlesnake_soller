@@ -21,6 +21,9 @@ def read_root():
 
 @app.post("/start")
 def start_battle(request: dict):
+    print("Start")
+    print(request)
+
     board = Board.from_json(request["board"])
     me = Battlesnake.from_json(request["you"])
 
@@ -29,10 +32,15 @@ def start_battle(request: dict):
 
 @app.post("/move")
 def move(request: dict):
+    print("Move")
+    print(request)
+
     board = Board.from_json(request["board"])
     me = Battlesnake.from_json(request["you"])
 
     moviment = board.navigate_to(me.head, board.get_closest_food(me))
+
+    print(moviment)
 
     response = {
         "move": moviment,
