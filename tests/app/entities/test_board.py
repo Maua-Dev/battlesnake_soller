@@ -1,6 +1,6 @@
 from src.app.entities.battlesanke import Battlesnake
 from src.app.entities.board import Board
-from src.app.entities.coodinate import Coordinate
+from src.app.entities.coordinate import Coordinate
 
 
 class Test_Board:
@@ -217,3 +217,76 @@ class Test_Board:
 
         assert type(closest_food) == Coordinate
         assert closest_food == Coordinate(8, 8)
+
+
+    def test_is_inside_snake(self):
+
+        my_snake = Battlesnake(
+            snake_id="snake-id-string",
+            name="Sneky McSnek Face",
+            health=90,
+            body=[
+                Coordinate(0, 0),
+                Coordinate(1, 0),
+                Coordinate(2, 0)
+            ],
+            latency="111",
+            head=Coordinate(0, 0),
+            length=3,
+            shout="Tá ligado?",
+            squad="1"
+        )
+
+
+        board = Board(
+            height =11,
+            width = 11,
+            food= [
+                Coordinate(8, 8),
+                Coordinate(9, 9),
+                Coordinate(11, 7)
+            ],
+            snakes=[
+                Battlesnake(
+                    "snake-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(3, 2),
+                        Coordinate(2, 1),
+                        Coordinate(1, 0)
+                    ],
+                    "111",
+                    Coordinate(3, 2),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                Battlesnake(
+                    "snake-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 6),
+                        Coordinate(4, 7),
+                        Coordinate(4, 8)
+                    ],
+                    "111",
+                    Coordinate(4, 6),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                my_snake
+            ],
+            hazards=[
+                Coordinate(3, 2)
+            ]
+        )
+
+        
+        assert board.is_snake("up", my_snake.head) == False
+        assert type(board.is_snake("right", my_snake.head)) == Battlesnake
+
+
+        

@@ -20,14 +20,14 @@ class Coordinate:
     def distance(a, b):
         return abs(a.x - b.x) + abs(a.y - b.y)
     
-    def move_command(move: str):
+    def move_command(self, move: str):
         if move == "up":
-            return Coordinate(0, 1)
+            return Coordinate(self.x, self.y + 1)
         elif move == "down":
-            return Coordinate(0, -1)
+            return Coordinate(self.x, self.y - 1)
         elif move == "left":
-            return Coordinate(-1, 0)
+            return Coordinate(self.x - 1, self.y)
         elif move == "right":
-            return Coordinate(1, 0)
+            return Coordinate(self.x + 1, self.y)
         else:
-            return Coordinate(0, 0)
+            return Coordinate(self.x, self.y)

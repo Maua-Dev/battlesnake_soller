@@ -1,6 +1,6 @@
 from random import randint
 from typing import List
-from .coodinate import Coordinate
+from .coordinate import Coordinate
 
 
 class Battlesnake:

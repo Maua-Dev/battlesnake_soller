@@ -1,7 +1,7 @@
 from typing import List
 from .battlesanke import Battlesnake
 
-from .coodinate import Coordinate
+from .coordinate import Coordinate
 
 
 class Board:
@@ -53,3 +53,18 @@ class Board:
             if Coordinate.distance(snake.head, food) < Coordinate.distance(snake.head, closest_food):
                 closest_food = food
         return closest_food
+    
+    def is_snake(self, move: str, head: Coordinate):
+        coordinate = head.move_command(move)
+        for snake in self.snakes:
+            if snake.is_inside_snake(coordinate):
+                return snake
+        return False
+    
+    def is_hazard(self, move: str, head: Coordinate):
+        coordinate = head.move_command(move)
+        for hazard in self.hazards:
+            if hazard == coordinate:
+                return True
+        return False
+    

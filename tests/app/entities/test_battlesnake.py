@@ -1,5 +1,5 @@
 from src.app.entities.battlesanke import Battlesnake
-from src.app.entities.coodinate import Coordinate
+from src.app.entities.coordinate import Coordinate
 
 
 class Test_Battlesnake:

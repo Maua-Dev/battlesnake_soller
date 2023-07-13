@@ -1,4 +1,4 @@
-from src.app.entities.coodinate import Coordinate
+from src.app.entities.coordinate import Coordinate
 
 
 class Test_Coordinate:
@@ -58,10 +58,10 @@ class Test_Coordinate:
     def test_move_command(self):
 
         head = Coordinate(1, 1)
-        
+
         assert head.move_command("up") == Coordinate(1, 2)
         assert head.move_command("down") == Coordinate(1, 0)
         assert head.move_command("left") == Coordinate(0, 1)
         assert head.move_command("right") == Coordinate(2, 1)
-        assert head.move_command("invalid") == Coordinate(0, 0)
+        assert head.move_command("invalid") == head
 
