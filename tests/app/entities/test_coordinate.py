@@ -43,5 +43,15 @@ class Test_Coordinate:
         assert coordinate.x == x
         assert coordinate.y == y
 
+    def test_coordinate_distance(self):
+        a = Coordinate(1, 1)
+        b = Coordinate(2, 2)
 
+        assert Coordinate.distance(a, b) == 2
+
+    def test_coodinate_distance_diagonal(self):
+        a = Coordinate(0, 0)
+        b = Coordinate(3, 4)
+
+        assert Coordinate.distance(a, b) == 7
 

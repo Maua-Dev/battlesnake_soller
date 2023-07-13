@@ -15,3 +15,7 @@ class Coordinate:
     
     def __repr__(self):
         return f"Coordinate: {self.x},{self.y}"
+    
+    @staticmethod
+    def distance(a, b):
+        return abs(a.x - b.x) + abs(a.y - b.y)
