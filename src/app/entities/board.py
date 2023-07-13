@@ -70,6 +70,12 @@ class Board:
 
     def dodge_snake_body(self, me: Battlesnake, snake: Battlesnake):
         for move in ["up", "down", "left", "right"]:
-            if not self.is_snake(move, me.head):
+            if not self.is_snake(move, me.head) and not self.is_out_of_bounds(move, me.head) and not self.is_hazard(move, me.head):
                 return move
         return "up"
+    
+    def is_out_of_bounds(self, move: str, head: Coordinate):
+        coordinate = head.move_command(move)
+        if coordinate.x < 0 or coordinate.x >= self.width or coordinate.y < 0 or coordinate.y >= self.height:
+            return True
+        return False
