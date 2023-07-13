@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from mangum import Mangum
+from src.app.entities.battlesanke import Battlesnake
+
+from src.app.entities.board import Board
 
 app = FastAPI()
-
 
 @app.get("/")
 def read_root():
@@ -17,17 +19,19 @@ def read_root():
     return response
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int):
-    return {"item_id": item_id}
+@app.post("/start")
+def start_battle(request: dict):
+    board = Board.from_json(request["board"])
+    me = Battlesnake.from_json(request["you"])
 
-@app.post("/create_item")
-def create_item(request: dict):
-    item_id = request.get("item_id")
-    name = request.get("name")
+    return
 
-    return {"item_id": item_id,
-            "name": name}   
+
+# @app.post("/move")
+
+# @app.post("/end")
+
+
 
 
 handler = Mangum(app, lifespan="off")

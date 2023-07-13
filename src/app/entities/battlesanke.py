@@ -40,5 +40,5 @@ class Battlesnake:
         head = Coordinate.from_json(json["head"])
         length = json["length"]
         shout = json["shout"]
-        squad = json["squad"]
+        squad = json.get("squad", "")
         return Battlesnake(snake_id, name, health, body, latency, head, length, shout, squad)
