@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional, Tuple
 from .battlesanke import Battlesnake
 
 from .coordinate import Coordinate
@@ -35,7 +35,7 @@ class Board:
         return Board(height, width, food, snakes, hazards)
 
     @staticmethod
-    def navigate_to(start: Coordinate, end: Coordinate):
+    def navigate_to(start: Coordinate, end: Coordinate) -> str:
         if start.x < end.x:
             return "right"
         elif start.x > end.x:
@@ -46,6 +46,19 @@ class Board:
             return "down"
         else:
             return "up"
+        
+    def where_to_go(self, me: Battlesnake) -> str:
+            
+        near_snake, move = self.get_near_snake_head(me)
+           
+        if len(self.food) > 0 and near_snake is None:
+            move = self.navigate_to(me.head, self.get_closest_food(me))
+        elif near_snake is not None:
+            move = self.navigate_to(me.head, near_snake.head)
+        else:
+            move = self.navigate_to(me.head, me.body[0])
+        
+        return move
 
     def get_closest_food(self, snake: Battlesnake):
         closest_food = self.food[0]
@@ -69,11 +82,11 @@ class Board:
         return False
 
     def dodge_snake_body(self, me: Battlesnake, old_move: str):
-        if  not self.is_snake(old_move, me.head) and not self.is_out_of_bounds(old_move, me.head) and not self.is_hazard(old_move, me.head) and not self.is_near_snake_head(old_move, me):
+        if  self.can_move(old_move, me):
             return old_move
 
         for move in ["up", "down", "left", "right"]:
-            if not self.is_snake(move, me.head) and not self.is_out_of_bounds(move, me.head) and not self.is_hazard(move, me.head) and not self.is_near_snake_head(move, me):
+            if self.can_move(move, me):
                 return move
         return old_move
     
@@ -82,10 +95,34 @@ class Board:
         if coordinate.x < 0 or coordinate.x >= self.width or coordinate.y < 0 or coordinate.y >= self.height:
             return True
         return False
+    
+    def can_move(self, move: str, me: Battlesnake):
+        head = me.head
+        snake, move_returned = self.get_near_snake_head(me, move)
+
+        if not self.is_out_of_bounds(move, head) and not self.is_snake(move, head) and not self.is_hazard(move, head) and not (snake is not None and snake.length >= me.length):
+            return True
+        return False
 
     def is_near_snake_head(self, move: str, me: Battlesnake):
-        coordinate = me.head.move_command(move)
-        for snake in self.snakes:
-            if snake.is_near_head(coordinate) and snake.snake_id != me.snake_id and snake.length >= me.length:
-                return True
+        snake, move = self.get_near_snake_head(me, move)
+
+        if snake is not None:
+            return True
         return False
+    
+    def get_near_snake_head(self, me: Battlesnake, move: str = None) -> Tuple[Optional[Battlesnake], Optional[str]]:
+        if move is not None:
+            coordinate = me.head.move_command(move)
+            for snake in self.snakes:
+                if snake.is_near_head(coordinate) and snake.snake_id != me.snake_id:
+                    return snake, move
+            return None, None
+        
+        for move in ["up", "down", "left", "right"]:
+            coordinate = me.head.move_command(move)
+            for snake in self.snakes:
+                if snake.is_near_head(coordinate) and snake.snake_id != me.snake_id:
+                    return snake, move
+        return None, None
+        

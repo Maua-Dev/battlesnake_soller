@@ -288,6 +288,77 @@ class Test_Board:
         assert board.is_snake("up", my_snake.head) == False
         assert type(board.is_snake("right", my_snake.head)) == Battlesnake
 
+    def test_get_near_snake_head(self):
+        my_snake = Battlesnake(
+            snake_id="my-id-string",
+            name="Sneky McSnek Face",
+            health=90,
+            body=[
+                Coordinate(0, 1),
+                Coordinate(0, 0),
+                Coordinate(1, 0),
+                Coordinate(2, 0)
+            ],
+            latency="111",
+            head=Coordinate(2, 0),
+            length=4,
+            shout="Tá ligado?",
+            squad="1"
+        )
+
+
+        board = Board(
+            height =11,
+            width = 11,
+            food= [
+                Coordinate(8, 8),
+                Coordinate(9, 9),
+                Coordinate(11, 7)
+            ],
+            snakes=[
+                Battlesnake(
+                    "death-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 2),
+                        Coordinate(4, 1),
+                        Coordinate(4, 0)
+                    ],
+                    "111",
+                    Coordinate(4, 0),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                Battlesnake(
+                    "snake-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 6),
+                        Coordinate(4, 7),
+                        Coordinate(4, 8)
+                    ],
+                    "111",
+                    Coordinate(4, 6),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                my_snake
+            ],
+            hazards=[
+                Coordinate(3, 2)
+            ]
+        )
+
+        result = board.get_near_snake_head(my_snake)
+
+        assert type(result) == tuple
+        assert type(result[0]) == Battlesnake
+        assert result[1] == "right"
+        assert result[0].snake_id == "death-id-string"
 
     def test_is_near_snake_head(self):
         my_snake = Battlesnake(
@@ -359,4 +430,211 @@ class Test_Board:
         assert board.is_near_snake_head("down", my_snake) == False
 
 
-    
+    def test_can_move(self):
+        my_snake = Battlesnake(
+            snake_id="my-id-string",
+            name="Sneky McSnek Face",
+            health=90,
+            body=[
+                Coordinate(0, 1),
+                Coordinate(0, 0),
+                Coordinate(1, 0),
+                Coordinate(2, 0)
+            ],
+            latency="111",
+            head=Coordinate(2, 0),
+            length=4,
+            shout="Tá ligado?",
+            squad="1"
+        )
+
+
+        board = Board(
+            height =11,
+            width = 11,
+            food= [
+                Coordinate(8, 8),
+                Coordinate(9, 9),
+                Coordinate(11, 7)
+            ],
+            snakes=[
+                Battlesnake(
+                    "death-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 2),
+                        Coordinate(4, 1),
+                        Coordinate(4, 0)
+                    ],
+                    "111",
+                    Coordinate(4, 0),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                Battlesnake(
+                    "snake-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 6),
+                        Coordinate(4, 7),
+                        Coordinate(4, 8)
+                    ],
+                    "111",
+                    Coordinate(4, 6),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                my_snake
+            ],
+            hazards=[
+                Coordinate(3, 2)
+            ]
+        )
+
+        result = board.can_move("right", my_snake)
+
+        assert result == True
+
+    def test_can_move_false(self):
+        my_snake = Battlesnake(
+            snake_id="my-id-string",
+            name="Sneky McSnek Face",
+            health=90,
+            body=[
+                Coordinate(0, 1),
+                Coordinate(0, 0),
+                Coordinate(1, 0),
+                Coordinate(2, 0)
+            ],
+            latency="111",
+            head=Coordinate(2, 0),
+            length=4,
+            shout="Tá ligado?",
+            squad="1"
+        )
+
+
+        board = Board(
+            height =11,
+            width = 11,
+            food= [
+                Coordinate(8, 8),
+                Coordinate(9, 9),
+                Coordinate(11, 7)
+            ],
+            snakes=[
+                Battlesnake(
+                    "death-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 4),
+                        Coordinate(4, 3),
+                        Coordinate(4, 2),
+                        Coordinate(4, 1),
+                        Coordinate(4, 0)
+                    ],
+                    "111",
+                    Coordinate(4, 0),
+                    5,
+                    "why are we shouting??",
+                    "1"
+                ),
+                Battlesnake(
+                    "snake-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 6),
+                        Coordinate(4, 7),
+                        Coordinate(4, 8)
+                    ],
+                    "111",
+                    Coordinate(4, 6),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                my_snake
+            ],
+            hazards=[
+                Coordinate(3, 2)
+            ]
+        )
+
+        result = board.can_move("right", my_snake) 
+
+        assert result == False 
+
+    def test_where_to_go(self):
+        my_snake = Battlesnake(
+            snake_id="my-id-string",
+            name="Sneky McSnek Face",
+            health=90,
+            body=[
+                Coordinate(0, 1),
+                Coordinate(0, 0),
+                Coordinate(1, 0),
+                Coordinate(2, 0)
+            ],
+            latency="111",
+            head=Coordinate(2, 0),
+            length=4,
+            shout="Tá ligado?",
+            squad="1"
+        )
+
+
+        board = Board(
+            height =11,
+            width = 11,
+            food= [
+                Coordinate(8, 8),
+                Coordinate(9, 9),
+                Coordinate(11, 7)
+            ],
+            snakes=[
+                Battlesnake(
+                    "death-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 2),
+                        Coordinate(4, 1),
+                        Coordinate(4, 0)
+                    ],
+                    "111",
+                    Coordinate(4, 0),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                Battlesnake(
+                    "snake-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 6),
+                        Coordinate(4, 7),
+                        Coordinate(4, 8)
+                    ],
+                    "111",
+                    Coordinate(4, 6),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                my_snake
+            ],
+            hazards=[
+                Coordinate(3, 2)
+            ]
+        )
+
+        result = board.where_to_go(my_snake)
+
+        assert result == "right"

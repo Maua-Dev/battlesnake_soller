@@ -38,7 +38,7 @@ def move(request: dict):
     board = Board.from_json(request["board"])
     me = Battlesnake.from_json(request["you"])
 
-    move = board.navigate_to(me.head, board.get_closest_food(me))
+    move = board.where_to_go(me)
 
     move = board.dodge_snake_body(me, move)
 
