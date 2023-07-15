@@ -13,7 +13,7 @@ def read_root():
         "author": "VgsStudio",
         "color": "#9370DB",
         "head": "villain",
-        "tail": "weight",
+        "tail": "coffee",
         "version": "0.0.1-beta"
         }
     return response
