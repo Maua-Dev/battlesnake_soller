@@ -289,4 +289,74 @@ class Test_Board:
         assert type(board.is_snake("right", my_snake.head)) == Battlesnake
 
 
-        
+    def test_is_near_snake_head(self):
+        my_snake = Battlesnake(
+            snake_id="my-id-string",
+            name="Sneky McSnek Face",
+            health=90,
+            body=[
+                Coordinate(0, 1),
+                Coordinate(1, 1),
+                Coordinate(2, 1)
+            ],
+            latency="111",
+            head=Coordinate(2, 1),
+            length=3,
+            shout="Tá ligado?",
+            squad="1"
+        )
+
+
+        board = Board(
+            height =11,
+            width = 11,
+            food= [
+                Coordinate(8, 8),
+                Coordinate(9, 9),
+                Coordinate(11, 7)
+            ],
+            snakes=[
+                Battlesnake(
+                    "snake-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(3, 2),
+                        Coordinate(3, 1),
+                        Coordinate(3, 0)
+                    ],
+                    "111",
+                    Coordinate(3, 2),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                Battlesnake(
+                    "snake-id-string",
+                    "Sneky McSnek Face",
+                    90,
+                    [
+                        Coordinate(4, 6),
+                        Coordinate(4, 7),
+                        Coordinate(4, 8)
+                    ],
+                    "111",
+                    Coordinate(4, 6),
+                    3,
+                    "why are we shouting??",
+                    "1"
+                ),
+                my_snake
+            ],
+            hazards=[
+                Coordinate(3, 2)
+            ]
+        )
+
+        assert board.is_near_snake_head("up", my_snake) == True
+        assert board.is_near_snake_head("right", my_snake) == True
+        assert board.is_near_snake_head("left", my_snake) == False
+        assert board.is_near_snake_head("down", my_snake) == False
+
+
+    

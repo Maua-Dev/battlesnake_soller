@@ -79,3 +79,10 @@ class Board:
         if coordinate.x < 0 or coordinate.x >= self.width or coordinate.y < 0 or coordinate.y >= self.height:
             return True
         return False
+
+    def is_near_snake_head(self, move: str, me: Battlesnake):
+        coordinate = me.head.move_command(move)
+        for snake in self.snakes:
+            if snake.is_near_head(coordinate) and snake.snake_id != me.snake_id:
+                return True
+        return False
