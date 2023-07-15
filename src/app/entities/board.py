@@ -68,11 +68,14 @@ class Board:
                 return True
         return False
 
-    def dodge_snake_body(self, me: Battlesnake, snake: Battlesnake):
+    def dodge_snake_body(self, me: Battlesnake, old_move: str):
+        if  not self.is_snake(old_move, me.head) and not self.is_out_of_bounds(move, me.head) and not self.is_hazard(move, me.head) and not self.is_near_snake_head(old_move, me):
+            return old_move
+
         for move in ["up", "down", "left", "right"]:
-            if not self.is_snake(move, me.head) and not self.is_out_of_bounds(move, me.head) and not self.is_hazard(move, me.head):
+            if not self.is_snake(move, me.head) and not self.is_out_of_bounds(move, me.head) and not self.is_hazard(move, me.head) and not self.is_near_snake_head(move, me):
                 return move
-        return "up"
+        return old_move
     
     def is_out_of_bounds(self, move: str, head: Coordinate):
         coordinate = head.move_command(move)
@@ -83,6 +86,6 @@ class Board:
     def is_near_snake_head(self, move: str, me: Battlesnake):
         coordinate = me.head.move_command(move)
         for snake in self.snakes:
-            if snake.is_near_head(coordinate) and snake.snake_id != me.snake_id:
+            if snake.is_near_head(coordinate) and snake.snake_id != me.snake_id and snake.length >= me.length:
                 return True
         return False
