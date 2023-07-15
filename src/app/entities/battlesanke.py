@@ -55,3 +55,8 @@ class Battlesnake:
             if body == coordinate:
                 return True
         return False
+    
+    def is_near_head(self, coordinate: Coordinate):
+        if Coordinate.distance(self.head, coordinate) <= 1:
+            return True
+        return False

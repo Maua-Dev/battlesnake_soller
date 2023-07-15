@@ -79,7 +79,7 @@ class Test_Battlesnake:
         health = 100
         body = [Coordinate(0, 0), Coordinate(1, 0), Coordinate(2, 0)]
         latency = "latency"
-        head = Coordinate(1, 2)
+        head = Coordinate(0, 0)
         length = 1
         shout = "shout"
         squad = "squad"
@@ -90,3 +90,23 @@ class Test_Battlesnake:
         assert battlesnake.is_inside_snake(Coordinate(1, 0))
         assert battlesnake.is_inside_snake(Coordinate(2, 0))
         assert not battlesnake.is_inside_snake(Coordinate(3, 0))
+
+
+    def test_is_near_head(self):
+        snake_id = "1"
+        name = "name"
+        health = 100
+        body = [Coordinate(3, 4), Coordinate(3, 5), Coordinate(3, 6)]
+        latency = "latency"
+        head = Coordinate(3, 4)
+        length = 1
+        shout = "shout"
+        squad = "squad"
+
+        battlesnake = Battlesnake(snake_id, name, health, body, latency, head, length, shout, squad)
+
+        assert not battlesnake.is_near_head(Coordinate(0, 0))
+        assert battlesnake.is_near_head(Coordinate(2, 4))
+        assert battlesnake.is_near_head(Coordinate(4, 4))
+        assert battlesnake.is_near_head(Coordinate(3, 3))
+
