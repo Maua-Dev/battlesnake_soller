@@ -40,11 +40,7 @@ def move(request: dict):
 
     move = board.navigate_to(me.head, board.get_closest_food(me))
 
-    maybe_snake = board.is_snake(move, me.head)
-
-    if type(maybe_snake) == Battlesnake:
-        print("Dodge snake")
-        move = board.dodge_snake_body(me, maybe_snake)
+    move = board.dodge_snake_body(me, move)
 
     print(move)
 
