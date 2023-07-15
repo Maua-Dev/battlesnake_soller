@@ -69,7 +69,7 @@ class Board:
         return False
 
     def dodge_snake_body(self, me: Battlesnake, old_move: str):
-        if  not self.is_snake(old_move, me.head) and not self.is_out_of_bounds(move, me.head) and not self.is_hazard(move, me.head) and not self.is_near_snake_head(old_move, me):
+        if  not self.is_snake(old_move, me.head) and not self.is_out_of_bounds(old_move, me.head) and not self.is_hazard(old_move, me.head) and not self.is_near_snake_head(old_move, me):
             return old_move
 
         for move in ["up", "down", "left", "right"]:
