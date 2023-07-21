@@ -58,7 +58,4 @@ def move(request: dict):
 def end_battle(request: dict):
     return
 
-
-
-
 handler = Mangum(app, lifespan="off")
