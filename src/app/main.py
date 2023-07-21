@@ -14,7 +14,7 @@ def read_root():
         "color": "#9370DB",
         "head": "villain",
         "tail": "coffee",
-        "version": "0.0.1-beta"
+        "version": "1.0.0"
         }
     return response
 

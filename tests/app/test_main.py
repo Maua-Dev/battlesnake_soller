@@ -12,7 +12,7 @@ class Test_Main:
         "color": "#9370DB",
         "head": "villain",
         "tail": "coffee",
-        "version": "0.0.1-beta"
+        "version": "1.0.0"
         }
 
     def test_start_battle(self):
