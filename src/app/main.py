@@ -11,10 +11,10 @@ def read_root():
     response = {
         "apiversion": "1",
         "author": "VgsStudio",
-        "color": "#9370DB",
-        "head": "villain",
-        "tail": "coffee",
-        "version": "1.0.0"
+        "color": "#FF5F1F",
+        "head": "chicken",
+        "tail": "flytrap",
+        "version": "2.0.0"
         }
     return response
 
