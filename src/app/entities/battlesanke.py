@@ -38,7 +38,7 @@ class Battlesnake:
         name = json["name"]
         health = json["health"]
         body = [Coordinate.from_json(body) for body in json["body"]]
-        latency = json["latency"]
+        latency = json.get("latency", "500")
         head = Coordinate.from_json(json["head"])
         length = json["length"]
         shout = json["shout"]
